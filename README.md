@@ -44,7 +44,7 @@ https://github.com/greenthree/meiriyiti-contributions
 
 ## 4. 手动投稿
 
-也可以自己操作。以下用 my-problem 作为投稿文件夹名，实际使用时可换成自己的英文名称。
+这里的“手动”指由投稿者自己执行各步骤，仍然使用 ProbHub、投稿脚本和 Git 等工具。以下命令在本地终端执行，my-problem 可换成自己的英文投稿文件夹名。
 
 1. **获取项目并配置环境。** 先准备 [环境说明](docs/ENVIRONMENT.md) 中列出的基础工具，再在仓库首页点击 Fork，将仓库复制到自己的账号。把下面的 YOUR_NAME 换成你的 GitHub 用户名，再运行：
 
@@ -85,8 +85,15 @@ https://github.com/greenthree/meiriyiti-contributions
    git push -u origin submit/my-problem
    ~~~
 
-   打开自己的 GitHub 仓库，点击 Compare & pull request，目标选择 greenthree/meiriyiti-contributions 的 main 分支。
-   按 PR 模板填写并提交，这个 Pull Request 就是你的投稿。
+   可以使用 GitHub CLI 创建投稿，将 YOUR_NAME 换成自己的 GitHub 用户名；已登录时可跳过登录命令：
+
+   ~~~bash
+   gh auth login
+   gh pr create --repo greenthree/meiriyiti-contributions --base main --head YOUR_NAME:submit/my-problem
+   ~~~
+
+   按提示填写标题和 PR 模板，完成提交。也可以在自己的 GitHub 仓库点击 Compare & pull request，
+   将目标选择为 greenthree/meiriyiti-contributions 的 main 分支。这个 Pull Request 就是你的投稿。
    如需修改，继续在同一分支提交并推送，原投稿会自动更新。
 
 提交后，等待自动检查和维护者审核；按审稿意见自行修改或继续让 AI 协助即可。
