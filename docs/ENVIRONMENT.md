@@ -7,7 +7,7 @@
 - Windows 或 Linux x86_64；当前 ProbHub 0.7.1 不支持原生 macOS，遇到不支持的平台应如实说明。
 - Git、Node.js 22、CPython 3.11、g++。
 - ProbHub 固定为 0.7.1，Python 依赖使用该包附带的 requirements.lock。
-- GitHub CLI（gh）可用于投稿者自行提交，也可供 AI 代提交；使用投稿者自己的账号登录。也可以通过网页创建 PR。没有写权限时使用 Fork 和 PR。
+- GitHub CLI（gh）可用于投稿者自行提交，也可供 AI 代提交；使用投稿者自己的账号登录。投稿统一先 Fork 到自己的账号，再从自己的 Fork 向原仓库发起 PR，也可以通过网页完成。
 - 投稿者本地验证不要求安装 Docker；PR 的隔离验证由 GitHub Actions 执行。
 
 ## 安装项目依赖

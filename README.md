@@ -3,6 +3,8 @@
 
 本项目题目统一面向大一新生。你可以选择**通过 AI Agent 全程代办（推荐）**，或**在终端中自行使用命令行完成投稿**。
 
+投稿统一通过 **Fork → 在自己的仓库提交 → 向本仓库发起 PR** 完成。
+
 > **⚠️ 公开说明**：本仓库为完全公开仓库。提交的题面、代码、测试数据和题解在发起 PR 时即对外可见，正式发布时间由维护者另行安排。
 >
 > 📚 **参考文档**：[出题规范 (AGENTS.md)](AGENTS.md) · [环境配置说明 (docs/ENVIRONMENT.md)](docs/ENVIRONMENT.md)
@@ -19,7 +21,8 @@
 请帮我准备这个投稿项目的本地环境：
 https://github.com/greenthree/meiriyiti-contributions
 
-如果本地已有这个项目，请直接使用并保留已有修改；否则帮我下载。
+请将此仓库 Fork 到我的 GitHub 账号，再从我的 Fork 准备本地项目。
+已有 Fork 或本地项目请复用，保留已有修改，并确认推送目标是我自己的 Fork。
 先阅读项目的 AGENTS.md 和 docs/ENVIRONMENT.md，安装所需工具和固定版本依赖，并实际检查能否运行。
 需要我操作时，请用简单的步骤说明。完成后告诉我项目文件夹位置，以及是否可以开始出题。
 ~~~
@@ -46,7 +49,7 @@ https://github.com/greenthree/meiriyiti-contributions
 https://github.com/greenthree/meiriyiti-contributions
 
 核对署名、来源和发布修改授权；需要我登录或确认授权时，请用简单的步骤说明。
-使用我的 GitHub 账号创建投稿分支并发起 Pull Request；没有仓库写入权限时，通过我的 Fork 提交。
+使用我的 GitHub 账号，在我的 Fork 中创建投稿分支并推送，再向上述仓库的 main 分支发起 Pull Request。
 只提交本次题目，保留其他本地修改。已有同题投稿时更新原投稿，不要重复创建。
 完成后给我投稿链接，并告诉我自动检查是否通过；未通过时修复后更新同一份投稿。
 ~~~
@@ -104,7 +107,7 @@ python tools/contribution.py check submissions/my-problem
 
 ### 5. 提交代码并发起 PR
 
-仅将当前题目的目录加入 Git 提交并推送到远程分支：
+仅将当前题目的目录加入 Git 提交，并推送到自己 Fork 中的分支：
 
 ```bash
 git add submissions/my-problem/
