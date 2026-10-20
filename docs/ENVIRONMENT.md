@@ -1,13 +1,13 @@
-# 环境配置说明（供 AI 阅读）
+# 环境配置说明
 
-投稿者使用 README 中的提示词即可。Agent 负责检查、安装和验证环境，不要求投稿者逐条执行命令。
+可以让 AI 按本文检查、安装和验证环境，也可以自行按步骤配置。
 
 ## 支持环境
 
 - Windows 或 Linux x86_64；当前 ProbHub 0.7.1 不支持原生 macOS，遇到不支持的平台应如实说明。
 - Git、Node.js 22、CPython 3.11、g++。
 - ProbHub 固定为 0.7.1，Python 依赖使用该包附带的 requirements.lock。
-- 提交投稿需要 GitHub CLI（gh）和投稿者自己的 GitHub 登录。没有写权限时使用 Fork 和 PR。
+- AI 代提交时使用 GitHub CLI（gh）和投稿者自己的 GitHub 登录；手动投稿可以在网页创建 PR，无需安装 gh。没有写权限时使用 Fork 和 PR。
 - 投稿者本地验证不要求安装 Docker；PR 的隔离验证由 GitHub Actions 执行。
 
 ## 安装项目依赖
@@ -32,10 +32,10 @@ Linux：
 
 ## 实际检查
 
-检查 Git、Node.js、Python、g++、ProbHub 和 gh 是否能执行，并核对版本。
+检查 Git、Node.js、Python、g++ 和 ProbHub 是否能执行，并核对版本；AI 代提交时另外检查 gh。
 确认虚拟环境能导入 yaml，并执行 python tools/contribution.py --help，不能把安装成功直接当作验证完成。
 
-提交前用 gh auth status 检查登录；需要登录时引导投稿者通过浏览器完成。
+使用 gh 提交前，用 gh auth status 检查登录；需要登录时引导投稿者通过浏览器完成。
 作者署名、来源与发布修改授权必须由本人确认，不替作者填入同意，不索取密码或令牌。
 
 题目验证与交付继续遵守 AGENTS.md，统一使用 prepare/check 等投稿工具；

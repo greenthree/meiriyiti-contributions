@@ -1,6 +1,6 @@
 # 每日一题 · 投稿与审稿指南
 
-本项目的题目统一面向新生。你只需要描述题意，把下面三段提示词依次发给能操作本地文件和终端的 AI，按提示完成登录和作者授权即可。
+本项目的题目统一面向新生。可以把下方三段提示词依次交给 AI，也可以按后面的手动方法完成投稿。
 
 **公开说明：** 提交的题面、代码、数据和题解都会公开，正式发布时间由维护者安排。
 
@@ -42,6 +42,53 @@ https://github.com/greenthree/meiriyiti-contributions
 完成后给我投稿链接，并告诉我自动检查是否通过；未通过时修复后更新同一份投稿。
 ~~~
 
-提交后，等待自动检查和维护者审核；按审稿意见继续让 AI 修改即可。
+## 4. 手动投稿
 
-详细规范由 AI 阅读：[AGENTS.md](AGENTS.md) · [环境配置说明](docs/ENVIRONMENT.md)
+也可以自己操作。以下用 my-problem 作为投稿文件夹名，实际使用时可换成自己的英文名称。
+
+1. **获取项目并配置环境。** 先准备 [环境说明](docs/ENVIRONMENT.md) 中列出的基础工具，再在仓库首页点击 Fork，将仓库复制到自己的账号。把下面的 YOUR_NAME 换成你的 GitHub 用户名，再运行：
+
+   ~~~bash
+   git clone https://github.com/YOUR_NAME/meiriyiti-contributions.git
+   cd meiriyiti-contributions
+   git switch -c submit/my-problem
+   ~~~
+
+   进入项目后，按 [环境配置说明](docs/ENVIRONMENT.md) 安装 ProbHub 和 Python 依赖。已有本地项目时直接使用，不要覆盖已有修改。
+
+2. **创建题目。** 在项目根目录运行，替换题名、署名和考点：
+
+   ~~~bash
+   python tools/contribution.py new my-problem --title "题目名称" --author "作者署名" --topic "考点"
+   ~~~
+
+   题目位于 submissions/my-problem/P0001/，题解位于 submissions/my-problem/solution.md。
+   my-problem 是整份投稿的外层目录名，P0001 是里面固定的题目编号。
+
+3. **完成内容。** 按 [AGENTS.md](AGENTS.md) 替换示例骨架，完成题面、代码、数据配置和题解；
+   在 contribution.json 填写作者、来源和本人确认的发布修改授权。
+
+4. **验证题目。** 在项目根目录运行：
+
+   ~~~bash
+   python tools/contribution.py prepare submissions/my-problem
+   python tools/contribution.py check submissions/my-problem
+   ~~~
+
+   全部通过后再投稿，data.zip 由工具自动生成。详细验证要求见 AGENTS.md。
+
+5. **提交投稿。** 只提交这一份题目：
+
+   ~~~bash
+   git add submissions/my-problem/
+   git commit -m "投稿：题目名称"
+   git push -u origin submit/my-problem
+   ~~~
+
+   打开自己的 GitHub 仓库，点击 Compare & pull request，目标选择 greenthree/meiriyiti-contributions 的 main 分支。
+   按 PR 模板填写并提交，这个 Pull Request 就是你的投稿。
+   如需修改，继续在同一分支提交并推送，原投稿会自动更新。
+
+提交后，等待自动检查和维护者审核；按审稿意见自行修改或继续让 AI 协助即可。
+
+详细说明：[出题规范](AGENTS.md) · [环境配置说明](docs/ENVIRONMENT.md)
