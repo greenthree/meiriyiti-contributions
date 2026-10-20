@@ -80,7 +80,7 @@
 
 ## 6. 验证 SOP
 
-先安装固定版本 ProbHub 0.7.1，补齐规范源。仓库根目录执行：
+先按 [环境配置说明](docs/ENVIRONMENT.md) 准备工具和依赖，使用固定版本 ProbHub 0.7.1，补齐规范源。仓库根目录执行：
 
     python tools/contribution.py prepare submissions/<slug>
 
