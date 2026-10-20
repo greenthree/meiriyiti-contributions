@@ -111,6 +111,9 @@ def main():
                 (staged / "solution.md").write_bytes(solution.read_bytes())
                 write_workspace(staged, target, cfg["name"])
                 command = container_command(args.image, staged, target, "official", container_name)
+            # TemporaryDirectory is 0700 on Linux; the container runs as a different UID.
+            # Only this credential-free staged input is exposed, and its mount stays read-only.
+            staged.chmod(0o755)
             try:
                 subprocess.run(command, check=True, timeout=1800)
             finally:

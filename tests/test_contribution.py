@@ -1,5 +1,6 @@
 import copy
 import json
+import os
 from pathlib import Path
 import sys
 import shutil
@@ -211,6 +212,35 @@ class ContributionTests(unittest.TestCase):
                 self.assertRaises(subprocess.TimeoutExpired):
             review.main()
         self.assertEqual(run.call_args_list[-1].args[0][:3], ["docker", "rm", "-f"])
+
+    @unittest.skipIf(os.name == "nt", "Requires POSIX directory permissions")
+    def test_review_staging_is_traversable_by_the_container_uid(self):
+        repo = Path(self.temp.name) / "repo"
+        shutil.copytree(self.root, repo / "submissions/test")
+        observed = []
+
+        def run(args, **kwargs):
+            if args[0] == "git":
+                return subprocess.CompletedProcess(args, 0, stdout=b"submissions/test/P0001/problem.md\0")
+            if args[:2] == ["docker", "run"]:
+                mount = args[args.index("--mount") + 1]
+                staged = Path(mount.split("source=", 1)[1].split(",target=", 1)[0])
+                self.assertEqual(staged.stat().st_mode & 0o777, 0o755)
+                for path in staged.rglob("*"):
+                    mode = path.stat().st_mode
+                    self.assertTrue(mode & 0o004, str(path))
+                    if path.is_dir():
+                        self.assertTrue(mode & 0o001, str(path))
+                self.assertIn("--user=10001:10001", args)
+                self.assertIn("readonly", mount)
+                observed.append(staged)
+            return subprocess.CompletedProcess(args, 0)
+
+        with patch.object(sys, "argv", ["review", "--source", str(repo), "--base", "a" * 40,
+                                      "--head", "b" * 40]), \
+                patch.object(review.subprocess, "run", side_effect=run):
+            review.main()
+        self.assertEqual(len(observed), 1)
 
 
 if __name__ == "__main__":
