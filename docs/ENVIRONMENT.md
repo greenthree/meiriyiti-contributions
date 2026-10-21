@@ -8,6 +8,7 @@
 - Git、Node.js 22、CPython 3.11、g++。
 - ProbHub 固定为 0.7.1，Python 依赖使用该包附带的 requirements.lock。
 - GitHub CLI（gh）可用于投稿者自行提交，也可供 AI 代提交；使用投稿者自己的账号登录。投稿统一先 Fork 到自己的账号，再从自己的 Fork 向原仓库发起 PR，也可以通过网页完成。
+- Fork 时只复制 main，克隆时使用 git clone --single-branch --branch main <自己的 Fork 地址>，避免下载其他投稿分支。题目只留在 PR 中，录用后导入正式题库并关闭 PR，不合并进投稿仓库 main。
 - 投稿者本地验证不要求安装 Docker；PR 的隔离验证由 GitHub Actions 执行。
 
 ## 安装项目依赖
