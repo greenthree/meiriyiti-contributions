@@ -1,0 +1,130 @@
+schema_version: 1
+id: P0001
+name: 魔法电梯
+display_name: 魔法电梯
+difficulty: 0
+tags: []
+limits:
+  time: 1
+  memory: 256
+  output: 64
+  processes: 32
+statement:
+  source: problem.md
+judge:
+  type: standard
+  validator: code/validator.cpp
+solutions:
+  accepted:
+  - file: code/std.cpp
+    expected:
+      status: AC
+      all: true
+  - file: code/std2.cpp
+    expected:
+      status: AC
+      all: true
+    independence:
+      from: code/std.cpp
+      basis: algorithm
+      note: 采用双向广度优先搜索（Bidirectional BFS），从起点与终点双向搜索相遇点，反向搜索涉及除2等逆向转移逻辑，算法结构与单向搜索完全独立。
+  brute: []
+  wrong:
+  - file: code/wrong_dfs.cpp
+    expected:
+      status: WA
+      forbid:
+      - FAIL
+  - file: code/wrong_greedy.cpp
+    expected:
+      status: WA
+      forbid:
+      - FAIL
+generators:
+- code/inmaker.cpp
+data:
+  sample_dir: data/sample
+  secret_dir: data/secret
+  recipes:
+  - case: random01
+    generator: code/inmaker.cpp
+    args:
+    - random
+    - '50'
+    - '1'
+  - case: random02
+    generator: code/inmaker.cpp
+    args:
+    - random
+    - '500'
+    - '2'
+  - case: random03
+    generator: code/inmaker.cpp
+    args:
+    - random
+    - '10000'
+    - '3'
+  - case: random04
+    generator: code/inmaker.cpp
+    args:
+    - random
+    - '100000'
+    - '4'
+  - case: unreachable01
+    generator: code/inmaker.cpp
+    args:
+    - unreachable
+    - '100'
+    - '5'
+  - case: unreachable02
+    generator: code/inmaker.cpp
+    args:
+    - unreachable
+    - '10000'
+    - '6'
+  - case: same_st01
+    generator: code/inmaker.cpp
+    args:
+    - same
+    - '1000'
+    - '7'
+  - case: extreme01
+    generator: code/inmaker.cpp
+    args:
+    - extreme
+    - '1'
+    - '8'
+  - case: extreme02
+    generator: code/inmaker.cpp
+    args:
+    - extreme
+    - '2'
+    - '9'
+  - case: extreme03
+    generator: code/inmaker.cpp
+    args:
+    - extreme
+    - '3'
+    - '10'
+  - case: greedy_killer
+    generator: code/inmaker.cpp
+    args:
+    - kill_greedy
+    - '11'
+  - case: dfs_killer
+    generator: code/inmaker.cpp
+    args:
+    - kill_dfs
+    - '12'
+domjudge:
+  include_pdf: false
+stress:
+  generator: code/inmaker.cpp
+  args:
+  - random
+  - '100'
+  - '{seed}'
+  brute: code/std2.cpp
+  rounds: 100
+  time_limit: 1
+  tool_timeout: 5
