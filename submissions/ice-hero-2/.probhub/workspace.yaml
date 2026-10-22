@@ -1,0 +1,16 @@
+schema_version: 1
+contest:
+  title: 冰之勇者记2
+  author: 每日一题投稿
+typst:
+  directory: typst-statement/每日一题
+  creation_timestamp: 0
+problems:
+- id: P0001
+  directory: P0001
+lint:
+  forbidden_patterns:
+  - TODO
+  - FIXME
+  - '114514'
+  - 待补充
