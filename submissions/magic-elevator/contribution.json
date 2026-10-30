@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "problem_id": "P0001",
+  "topic": "广度优先搜索 (BFS)",
+  "authors": [
+    {
+      "name": "greenthree"
+    }
+  ],
+  "permission": "允许署名发布、修改并用于本项目教学与评测",
+  "source": "原创"
+}
