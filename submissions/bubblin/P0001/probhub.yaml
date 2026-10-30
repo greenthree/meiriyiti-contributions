@@ -1,0 +1,156 @@
+schema_version: 1
+id: P0001
+name: Bubblin
+display_name: Bubblin
+difficulty: 0
+tags:
+- 数论
+- 阶乘
+- 末尾零
+limits:
+  time: 1
+  memory: 256
+  output: 64
+  processes: 32
+statement:
+  source: problem.md
+  quote:
+    text: 若被爱包围，便会咕噜噜冒泡！
+    source: 肚脐娘
+judge:
+  type: standard
+  validator: code/validator.cpp
+solutions:
+  accepted:
+  - file: code/std.cpp
+    expected:
+      status: AC
+      all: true
+  - file: code/std2.cpp
+    expected:
+      status: AC
+      all: true
+    independence:
+      from: code/std.cpp
+      basis: key_implementation
+      note: std.cpp 枚举 5、25、125 等 5 的幂并累加 n/power；std2.cpp 递归地把 n 除以 5 并累加，二者不共享核心循环，属于独立实现。
+  brute: []
+  wrong:
+  - file: code/wrong.cpp
+    expected:
+      status: WA
+      groups:
+      - overflow
+      all: false
+      forbid:
+      - FAIL
+  - file: code/wrong2.cpp
+    expected:
+      status: WA
+      groups:
+      - powers
+      all: false
+      forbid:
+      - FAIL
+  - file: code/wrong3.cpp
+    expected:
+      status:
+      - TLE
+      - MLE
+      groups:
+      - huge
+      all: false
+      forbid:
+      - WA
+      - FAIL
+  - file: code/wrong4.cpp
+    expected:
+      status: WA
+      groups:
+      - powers
+      all: false
+      forbid:
+      - FAIL
+generators:
+- code/inmaker.cpp
+data:
+  sample_dir: data/sample
+  secret_dir: data/secret
+  groups:
+  - name: boundary
+    role: boundary
+    patterns:
+    - secret/edge*
+  - name: overflow
+    role: wrong-solution-killer
+    patterns:
+    - secret/over*
+    targets:
+    - code/wrong.cpp
+  - name: powers
+    role: wrong-solution-killer
+    patterns:
+    - secret/edge05
+    - secret/over02
+    - secret/over06
+    targets:
+    - code/wrong2.cpp
+    - code/wrong4.cpp
+  - name: huge
+    role: performance
+    patterns:
+    - secret/huge*
+    targets:
+    - code/wrong3.cpp
+  recipes:
+  - case: edge01
+    manual: true
+  - case: edge02
+    manual: true
+  - case: edge03
+    manual: true
+  - case: edge04
+    manual: true
+  - case: edge05
+    manual: true
+  - case: edge06
+    manual: true
+  - case: edge07
+    manual: true
+  - case: edge08
+    manual: true
+  - case: edge09
+    manual: true
+  - case: edge10
+    manual: true
+  - case: edge11
+    manual: true
+  - case: edge12
+    manual: true
+  - case: over01
+    manual: true
+  - case: over02
+    manual: true
+  - case: over03
+    manual: true
+  - case: over04
+    manual: true
+  - case: over05
+    manual: true
+  - case: over06
+    manual: true
+  - case: over07
+    manual: true
+  - case: huge01
+    manual: true
+domjudge:
+  include_pdf: false
+stress:
+  generator: code/inmaker.cpp
+  args:
+  - random
+  - '{seed}'
+  brute: code/std2.cpp
+  rounds: 100
+  time_limit: 1
+  tool_timeout: 5
