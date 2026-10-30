@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "problem_id": "P0001",
+  "topic": "图的BFS",
+  "authors": [
+    {
+      "name": "智慧冰精",
+      "github": "Crino-Knowledge"
+    }
+  ],
+  "permission": "允许署名发布、修改并用于本项目教学与评测",
+  "source": "原创"
+}
