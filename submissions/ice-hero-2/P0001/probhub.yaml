@@ -1,0 +1,189 @@
+schema_version: 1
+id: P0001
+name: 冰之勇者记2
+display_name: 冰之勇者记2
+difficulty: 0
+tags:
+- BFS
+- 图
+- 网格
+- 最短路径
+limits:
+  time: 1
+  memory: 256
+  output: 64
+  processes: 32
+statement:
+  source: problem.md
+  quote:
+    text: 公主在哪，路就在哪；这一次，她要走最短的那一条。
+    source: 智慧冰精
+judge:
+  type: standard
+  validator: code/validator.cpp
+solutions:
+  accepted:
+  - file: code/std.cpp
+    expected:
+      status: AC
+      all: true
+  - file: code/std2.cpp
+    expected:
+      status: AC
+      all: true
+    independence:
+      from: code/std.cpp
+      basis: key_implementation
+      note: std.cpp 使用二维距离数组加普通队列逐点扩展；std2.cpp 把网格压成一维编号，并用两层 vector 按“当前层/下一层”整体推进，核心数据结构与扩展方式均不同，不共享代码。
+  brute: []
+  wrong:
+  - file: code/wrong.cpp
+    expected:
+      status: WA
+      groups:
+      - detour
+      all: false
+      forbid:
+      - FAIL
+  - file: code/wrong2.cpp
+    expected:
+      status: WA
+      groups:
+      - diagonal
+      all: false
+      forbid:
+      - FAIL
+  - file: code/wrong3.cpp
+    expected:
+      status:
+      - TLE
+      groups:
+      - open-max
+      all: false
+      forbid:
+      - WA
+      - FAIL
+  - file: code/wrong4.cpp
+    expected:
+      status: WA
+      groups:
+      - boundary
+      all: false
+      forbid:
+      - FAIL
+generators:
+- code/inmaker.cpp
+data:
+  sample_dir: data/sample
+  secret_dir: data/secret
+  groups:
+  - name: boundary
+    role: boundary
+    patterns:
+    - secret/edge*
+  - name: detour
+    role: wrong-solution-killer
+    patterns:
+    - secret/detour*
+    - secret/snake*
+    targets:
+    - code/wrong.cpp
+  - name: diagonal
+    role: wrong-solution-killer
+    patterns:
+    - secret/open_small*
+    targets:
+    - code/wrong2.cpp
+  - name: open-max
+    role: performance
+    patterns:
+    - secret/open_max*
+    targets:
+    - code/wrong3.cpp
+  - name: random
+    role: random-supplement
+    patterns:
+    - secret/random*
+  recipes:
+  - case: edge01
+    manual: true
+  - case: edge02
+    manual: true
+  - case: edge03
+    manual: true
+  - case: detour01
+    manual: true
+  - case: snake01
+    generator: code/inmaker.cpp
+    args:
+    - snake
+  - case: open_small01
+    generator: code/inmaker.cpp
+    args:
+    - open
+    - '37'
+  - case: open_max01
+    generator: code/inmaker.cpp
+    args:
+    - open
+    - '1000'
+  - case: random01
+    generator: code/inmaker.cpp
+    args:
+    - random
+    - '1'
+    - '20'
+    - '40'
+  - case: random02
+    generator: code/inmaker.cpp
+    args:
+    - random
+    - '2'
+    - '50'
+    - '45'
+  - case: random03
+    generator: code/inmaker.cpp
+    args:
+    - random
+    - '3'
+    - '120'
+    - '50'
+  - case: random04
+    generator: code/inmaker.cpp
+    args:
+    - random
+    - '4'
+    - '400'
+    - '45'
+  - case: random05
+    generator: code/inmaker.cpp
+    args:
+    - random
+    - '5'
+    - '1000'
+    - '40'
+  - case: random06
+    generator: code/inmaker.cpp
+    args:
+    - random
+    - '6'
+    - '7'
+    - '55'
+  - case: random07
+    generator: code/inmaker.cpp
+    args:
+    - random
+    - '7'
+    - '999'
+    - '30'
+stress:
+  generator: code/inmaker.cpp
+  args:
+  - random
+  - '{seed}'
+  brute: code/std2.cpp
+  rounds: 100
+  time_limit: 1
+  tool_timeout: 5
+domjudge:
+  include_pdf: false
